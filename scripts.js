@@ -1,3 +1,4 @@
+// document.querySelector("#datetime").valueAsDate = new Date();
 var minutesLate;
 var eventDateTime;
 var reason;
