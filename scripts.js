@@ -31,17 +31,41 @@ const reasons =
   'she was overthinking times a million',
   'she was picking at her face',
   'she was on Depop',
+  'she is the daughter of Chloe Orkin',
+  'she left everything to the last minute',
+  'she forgot the event was today',
+  'she is just Taryn',
+  'she can\t find that one pair of black pants to wear'
 ];
 
 document.getElementById('datetimeForm').addEventListener('submit', function(event) {
   event.preventDefault(); // prevent the form from being submitted normally
-  eventDateTime = document.getElementById('datetime').value;
-  minutesLate = getMinutesLate();
-  tappyArrivalTime = moment(new Date(eventDateTime)).add(minutesLate, 'm');
-  reason = getReason();
-  logResults();
-  generateResult();
+  clearErrors();
+  var formValue = document.getElementById('datetime').value;
+  if (validDate(formValue)) {
+    eventDateTime = formValue;
+    minutesLate = getMinutesLate();
+    tappyArrivalTime = moment(new Date(eventDateTime)).add(minutesLate, 'm');
+    reason = getReason();
+    logResults();
+    generateResult();
+  } else {
+    console.log('Not a valid date/time');
+    dateInError();
+  }
 });
+
+function validDate(date) {
+  return !isNaN(Date.parse(date));
+}
+
+function clearErrors() {
+  document.getElementById("datetime").style["border-color"] = "black";
+}
+
+function dateInError() {
+  document.getElementById("datetime").style["border-color"] = "red";
+}
 
 function logResults() {
   console.log('Event date/time: ' + eventDateTime);
