@@ -1,7 +1,11 @@
-// document.querySelector("#datetime").valueAsDate = new Date();
+var curTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+//to rectify
+document.querySelector("#datetime").valueAsDate = moment.tz(moment().startOf('day').toDate(),"YYYY-MM-DDTHH:mm:ss",true,curTimezone).toDate();
+console.log(moment.tz(moment().startOf('day').toDate(),"YYYY-MM-DDTHH:mm:ss",true,curTimezone).toDate());
 var minutesLate;
 var eventDateTime;
 var reason;
+var prevReason;
 const reasons = 
 [
   'she was doing her makeup, got stressed out about it, and had to redo it', 
@@ -36,8 +40,13 @@ const reasons =
   'she left everything to the last minute',
   'she forgot the event was today',
   'she is just Taryn',
-  'she can\t find that one pair of black pants to wear'
+  'she can\t find that one pair of black pants to wear',
+  'she was too busy taking a bath',
+  'she was biting Matt',
+  'she was getting a soy dirty chai',
+  'she was zooming around in her Crocs, trying to crack the land-speed record'
 ];
+
 
 document.getElementById('datetimeForm').addEventListener('submit', function(event) {
   event.preventDefault(); // prevent the form from being submitted normally
@@ -82,5 +91,10 @@ function getMinutesLate() {
 }
 
 function getReason() {
-  return reasons[Math.floor(Math.random() * reasons.length)];
+  var index = Math.floor(Math.random() * reasons.length);
+  while (index == prevReason) {
+    var index = Math.floor(Math.random() * reasons.length);
+  }
+  prevReason = index;
+  return reasons[index];
 }
