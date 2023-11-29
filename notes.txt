@@ -1,0 +1,3 @@
+To test locally without CORS issues:
+
+Run from root directory: live-server
