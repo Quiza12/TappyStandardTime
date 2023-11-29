@@ -14,7 +14,7 @@ const reasons =
   'of Ed',
   'she was doing mini New York Times crosswords on her little book',
   'she was daydreaming about bedtime',
-  'Matt\'s helicoperting distracted her',
+  'Matt\'s studio distracted her',
   'she couldn\'t quite find the right arrangement of songs to get dressed to',
   'she listened to Taylor Swift\'s \'All Too Well (Taylor\'s Version) too many times',
   'Matty Healy started singing about chocolate',
