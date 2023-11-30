@@ -1,7 +1,8 @@
-var curTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-//to rectify
-document.querySelector("#datetime").valueAsDate = moment.tz(moment().startOf('day').toDate(),"YYYY-MM-DDTHH:mm:ss",true,curTimezone).toDate();
-console.log(moment.tz(moment().startOf('day').toDate(),"YYYY-MM-DDTHH:mm:ss",true,curTimezone).toDate());
+// Set datetime to start of current day.
+var now = moment().startOf('day').toDate(); 
+var localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60 * 1000);
+document.querySelector("#datetime").value = localTime.toISOString().slice(0,16);
+
 var minutesLate;
 var eventDateTime;
 var reason;
@@ -70,11 +71,11 @@ function validDate(date) {
 }
 
 function clearErrors() {
-  document.getElementById("datetime").style["border-color"] = "black";
+  document.getElementById("datetime").classList.remove("is-invalid");
 }
 
 function dateInError() {
-  document.getElementById("datetime").style["border-color"] = "red";
+  document.getElementById("datetime").classList.add("is-invalid");
 }
 
 function logResults() {

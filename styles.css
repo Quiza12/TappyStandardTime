@@ -1,7 +1,13 @@
-/* General */
-
 * {
   font-family: Helvetica, sans-serif;
   color: black;
   background-color: #fff;
+}
+
+label, input, button {
+  margin-bottom: 10px;
+}
+
+.results-section {
+  margin-top: 20px;
 }
