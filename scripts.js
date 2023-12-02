@@ -1,5 +1,5 @@
-// Set datetime to start of current day.
-var now = moment().startOf('day').toDate(); 
+// Set datetime to midday of current day.
+var now = moment().startOf('day').add(12, 'hours').toDate(); 
 var localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60 * 1000);
 document.querySelector("#datetime").value = localTime.toISOString().slice(0,16);
 
@@ -17,10 +17,9 @@ const reasons =
   'she was eating sweeties',
   'she is South African',
   'the makeup on one eye is darker than the other',
-  'of Ed',
   'she was doing mini New York Times crosswords on her little book',
   'she was daydreaming about bedtime',
-  'Matt\'s studio distracted her',
+  'Matt\'s general being distracted her',
   'she couldn\'t quite find the right arrangement of songs to get dressed to',
   'she listened to Taylor Swift\'s \'All Too Well (Taylor\'s Version) too many times',
   'Matty Healy started singing about chocolate',
@@ -33,7 +32,7 @@ const reasons =
   'of Tysie photos',
   'of Tysie videos',
   'of Tookie (either of them)',
-  'she was making up new Orkinisms like \'Wonkle\' and \'Tingle wingle\'',
+  'she was making up new Orkinisms like \'Wonkle\' and \'Badongle\'',
   'she was overthinking times a million',
   'she was picking at her face',
   'she was on Depop',
@@ -45,7 +44,11 @@ const reasons =
   'she was too busy taking a bath',
   'she was biting Matt',
   'she was getting a soy dirty chai',
-  'she was zooming around in her Crocs, trying to crack the land-speed record'
+  'she was zooming around in her Crocs, trying to crack the land-speed record',
+  'she was too busy taking her second bath of the day',
+  'Matt\'s Violent Soho music had given her three successive heart attacks',
+  'she was making Matt use mouthwash in a way that looked suspiciously like water-boarding',
+  'she bolted her acai bowl and was feeling sick',
 ];
 
 
@@ -88,14 +91,19 @@ function generateResult() {
 }
     
 function getMinutesLate() {
+  //150mins max, 5mins min
   return Math.floor(Math.random() * (150 - 5 + 1)) + 5;
 }
 
 function getReason() {
-  var index = Math.floor(Math.random() * reasons.length);
+  var index = getRandomReason();
   while (index == prevReason) {
-    var index = Math.floor(Math.random() * reasons.length);
+    index = getRandomReason();
   }
   prevReason = index;
   return reasons[index];
+}
+
+function getRandomReason() {
+  return Math.floor(Math.random() * reasons.length);;
 }
